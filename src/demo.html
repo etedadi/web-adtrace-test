@@ -2,20 +2,19 @@
 <html lang=en>
 <head>
   <meta charset=UTF-8>
-  <title>Adjust WebSDK</title>
+  <title>Adrace WebSDK</title>
 
-  <script type="text/javascript">
-    !function(t,a,e,r,s,l,d,n,o){t.Adjust=t.Adjust||{},t.Adjust_q=t.Adjust_q||[];for(var c=0;c<l.length;c++)d(t.Adjust,t.Adjust_q,l[c]);n=a.createElement("script"),o=a.getElementsByTagName("script")[0],n.async=!0,n.src="https://cdn.adjust.com/adjust-latest.min.js",n.onload=function(){for(var a=0;a<t.Adjust_q.length;a++)t.Adjust[t.Adjust_q[a][0]].apply(t.Adjust,t.Adjust_q[a][1]);t.Adjust_q=[]},o.parentNode.insertBefore(n,o)}(window,document,0,0,0,["initSdk","trackEvent","addGlobalCallbackParameters","addGlobalPartnerParameters","removeGlobalCallbackParameter","removeGlobalPartnerParameter","clearGlobalCallbackParameters","clearGlobalPartnerParameters","switchToOfflineMode","switchBackToOnlineMode","stop","restart","gdprForgetMe","disableThirdPartySharing"],function(t,a,e){t[e]=function(){a.push([e,arguments])}});
-  </script>
+  <script type="text/javascript" src="./dist/adtrace-latest.js"></script>
+
 </head>
 <body>
 <pre id="output" style="width: 100vw; height: 100vh;"></pre>
 
 <script type="text/javascript">
   /**
-   * initSdk: initiate adjust sdk instance, do it only once per page load
+   * initSdk: initiate adtrace sdk instance, do it only once per page load
    */
-  Adjust.initSdk({
+  Adtrace.initSdk({
     appToken: 'YOUR_APP_TOKEN', // required
     environment: 'production', // required, 'production' or 'sandbox' in case you are testing SDK locally with your web app
     attributionCallback: function (e, attribution) { // optional
@@ -35,7 +34,7 @@
    * trackEvent: track standard event, requires sdk instance to be initiated
    */
   /*
-  Adjust.trackEvent({
+  Adtrace.trackEvent({
     eventToken: 'YOUR_EVENT_TOKEN',
     // deduplicationId: 'YOUR_EVENT_DEDUPLICATION_ID' // optional
   });
@@ -45,7 +44,7 @@
    * trackEvent: track revenue event, requires sdk instance to be initiated
    */
   /*
-  Adjust.trackEvent({
+  Adtrace.trackEvent({
     eventToken: 'YOUR_EVENT_TOKEN',
     // deduplicationId: 'YOUR_EVENT_DEDUPLICATION_ID' // optional
     revenue: 111,
@@ -55,12 +54,12 @@
       {key: 'some-key-2', value: 'some-value-2'},
       {key: 'key1', value: 'new-value1'}
     ],
-    partnerParams: [
+    valueParams: [
       {key: 'key-1', value: 'new-value-1'},
-      {key: 'some-partner-key-1', value: 'some-partner-value-1'},
+      {key: 'some-value-key-1', value: 'some-value-value-1'},
       {key: 'key-2', value: 'new-value-2'},
-      {key: 'some-partner-key-2', value: 'some-partner-value-2'},
-      {key: 'some-partner-key-1', value: 'some-partner-value-3'}
+      {key: 'some-value-key-2', value: 'some-value-value-2'},
+      {key: 'some-value-key-1', value: 'some-value-value-3'}
     ]
   });
   */
@@ -69,17 +68,17 @@
    * addGlobalCallbackParameters: add global callback parameters
    */
   /*
-  Adjust.addGlobalCallbackParameters([
+  Adtrace.addGlobalCallbackParameters([
     {key: 'key1', value: 'value1'},
     {key: 'key2', value: 'value2'}
   ]);
   */
 
   /**
-   * addGlobalPartnerParameters: add global partner parameters
+   * addGlobalValueParameters: add global value parameters
    */
   /*
-  Adjust.addGlobalPartnerParameters([
+  Adtrace.addGlobalValueParameters([
     {key: 'key-1', value: 'value-1'},
     {key: 'key-2', value: 'value-2'},
     {key: 'key-3', value: 'value-3'}
@@ -90,70 +89,56 @@
    * removeGlobalCallbackParameter: remove global callback parameter per key
    */
   /*
-  Adjust.removeGlobalCallbackParameter('key1');
+  Adtrace.removeGlobalCallbackParameter('key1');
   */
 
   /**
-   * removeGlobalPartnerParameter: remove global partner parameters
+   * removeGlobalValueParameter: remove global value parameters
    */
   /*
-  Adjust.removeGlobalPartnerParameter('key-1');
+  Adtrace.removeGlobalValueParameter('key-1');
   */
 
   /**
    * clearGlobalCallbackParameters: clears all global callback parameters
    */
   /*
-  Adjust.clearGlobalCallbackParameters();
+  Adtrace.clearGlobalCallbackParameters();
   */
 
   /**
-   * clearGlobalPartnerParameters: clear all global partner parameters
+   * clearGlobalValueParameters: clear all global value parameters
    */
   /*
-  Adjust.clearGlobalPartnerParameters();
+  Adtrace.clearGlobalValueParameters();
   */
 
   /**
    * switchToOfflineMode: go to offline mode
    */
   /*
-  Adjust.switchToOfflineMode();
+  Adtrace.switchToOfflineMode();
   */
 
   /**
    * switchBackToOnlineMode: go back to online mode after went to offline mode by previous switchToOfflineMode method
    */
   /*
-  Adjust.switchBackToOnlineMode();
+  Adtrace.switchBackToOnlineMode();
   */
 
   /**
    * stop: stop the sdk
    */
   /*
-  Adjust.stop();
+  Adtrace.stop();
   */
 
   /**
    * restart: restart the sdk
    */
   /*
-  Adjust.restart();
-  */
-
-  /**
-   * gdprForgetMe: initiate GDPR forget me request
-   */
-  /*
-  Adjust.gdprForgetMe();
-  */
-
-  /**
-   * disableThirdPartySharing: initiate marketing opt-out request
-   */
-  /*
-  Adjust.disableThirdPartySharing();
+  Adtrace.restart();
   */
 </script>
 </body>

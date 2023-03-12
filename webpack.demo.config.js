@@ -8,7 +8,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
 const webpack = require('webpack')
 const packageJson = require('./package.json')
-const namespace = 'adjust-sdk'
+const namespace = 'adtrace-sdk'
 const version = packageJson.version
 
 module.exports = () => ({
@@ -65,7 +65,7 @@ module.exports = () => ({
           loader: 'css-loader',
           options: {
             modules: {
-              localIdentName: 'adjust-smart-banner-[local]__[hash:base64:5]',
+              localIdentName: 'adtrace-smart-banner-[local]__[hash:base64:5]',
             }
           }
         },

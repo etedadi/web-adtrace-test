@@ -5,19 +5,19 @@ const FlowWebpackPlugin = require('flowtype-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
 const packageJson = require('./package.json')
-const namespace = 'adjust-sdk'
+const namespace = 'adtrace-sdk'
 const version = packageJson.version
 
 module.exports = () => ({
   mode: 'production',
   entry: {
-    'adjust-latest': path.resolve(__dirname, 'src/sdk/main.js'),
-    'adjust-latest.min': path.resolve(__dirname, 'src/sdk/main.js')
+    'adtrace-latest': path.resolve(__dirname, 'src/sdk/main.js'),
+    'adtrace-latest.min': path.resolve(__dirname, 'src/sdk/main.js')
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
-    library: 'Adjust',
+    library: 'adtrace',
     libraryTarget: 'umd',
     libraryExport: 'default'
   },
@@ -52,7 +52,7 @@ module.exports = () => ({
           loader: 'css-loader',
           options: {
             modules: {
-              localIdentName: 'adjust-smart-banner__[hash:base64]',
+              localIdentName: 'adtrace-smart-banner__[hash:base64]',
             }
           },
         },

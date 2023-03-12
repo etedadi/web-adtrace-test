@@ -6,28 +6,25 @@ import {
   type GlobalParamsT,
   type CustomErrorT,
   type ActivityStateMapT,
-  type SmartBannerOptionsT,
   type AttributionMapT
 } from './types'
 import Config from './config'
 import Storage from './storage/storage'
 import Logger from './logger'
-import {run as queueRun, setOffline, clear as queueClear, destroy as queueDestroy} from './queue'
+import {run as queueRun, setOffline, destroy as queueDestroy} from './queue'
 import {subscribe, unsubscribe, destroy as pubSubDestroy} from './pub-sub'
 import {watch as sessionWatch, destroy as sessionDestroy} from './session'
-import {start, clear as identityClear, destroy as identityDestroy} from './identity'
-import {add, remove, removeAll, clear as globalParamsClear} from './global-params'
+import {start, destroy as identityDestroy} from './identity'
+import {add, remove, removeAll} from './global-params'
 import {check as attributionCheck, destroy as attributionDestroy} from './attribution'
 import {disable, restore, status} from './disable'
-import {check as gdprForgetCheck, forget, disable as gdprDisable, finish as gdprDisableFinish, destroy as gdprForgetDestroy} from './gdpr-forget-device'
-import {check as sharingDisableCheck, optOut as sharingOptOut, disable as sharingDisable, finish as sharingDisableFinish} from './third-party-sharing'
 import {register as listenersRegister, destroy as listenersDestroy} from './listeners'
 import {delay, flush, destroy as schedulerDestroy} from './scheduler'
 import event from './event'
 import sdkClick from './sdk-click'
 import ActivityState from './activity-state'
 import { STORAGE_TYPES } from './constants'
-import { SmartBanner } from './smart-banner/smart-banner'
+
 
 type InitConfigT = $ReadOnly<{|...InitOptionsT, ...LogOptionsT|}>
 
@@ -64,13 +61,6 @@ let _isStarted: boolean = false
 let _isInstalled: boolean = false
 
 /**
- * SmartBanner instance
- *
- * @private
- */
-let _smartBanner: ?SmartBanner = null
-
-/**
  * Initiate the instance with parameters
  *
  * @param {Object} options
@@ -95,7 +85,7 @@ function initSdk ({logLevel, logOutput, ...options}: InitConfigT = {}): void {
     .then(availableStorage => {
 
       if (availableStorage.type === STORAGE_TYPES.NO_STORAGE) {
-        Logger.error('Adjust SDK can not start, there is no storage available')
+        Logger.error('Adtrace SDK can not start, there is no storage available')
         return
       }
 
@@ -157,12 +147,12 @@ function addGlobalCallbackParameters (params: Array<GlobalParamsT>): void {
 }
 
 /**
- * Add global partner parameters
+ * Add global value parameters
  *
  * @param {Array} params
  */
-function addGlobalPartnerParameters (params: Array<GlobalParamsT>): void {
-  _preCheck('add global partner parameters', () => add(params, 'partner'))
+function addGlobalValueParameters (params: Array<GlobalParamsT>): void {
+  _preCheck('add global value parameters', () => add(params, 'value'))
 }
 
 /**
@@ -175,12 +165,12 @@ function removeGlobalCallbackParameter (key: string): void {
 }
 
 /**
- * Remove global partner parameter by key
+ * Remove global value parameter by key
  *
  * @param {string} key
  */
-function removeGlobalPartnerParameter (key: string): void {
-  _preCheck('remove global partner parameter', () => remove(key, 'partner'))
+function removeGlobalValueParameter (key: string): void {
+  _preCheck('remove global value parameter', () => remove(key, 'value'))
 }
 
 /**
@@ -191,10 +181,10 @@ function clearGlobalCallbackParameters (): void {
 }
 
 /**
- * Remove all global partner parameters
+ * Remove all global value parameters
  */
-function clearGlobalPartnerParameters (): void {
-  _preCheck('remove all global partner parameters', () => removeAll('partner'))
+function clearGlobalValueParameters (): void {
+  _preCheck('remove all global value parameters', () => removeAll('value'))
 }
 
 /**
@@ -233,93 +223,6 @@ function restart (): void {
   }
 }
 
-/**
- * Disable sdk and send GDPR-Forget-Me request
- */
-function gdprForgetMe (): void {
-  let done = forget()
-
-  if (!done) {
-    return
-  }
-
-  done = gdprDisable()
-
-  if (done && Config.isInitialised()) {
-    _pause()
-  }
-}
-
-/**
- * Disable third party sharing
- */
-function disableThirdPartySharing (): void {
-  _preCheck('disable third-party sharing', _handleDisableThirdPartySharing, {
-    schedule: true
-  })
-}
-
-function initSmartBanner (options: SmartBannerOptionsT): void {
-  if (_smartBanner) {
-    Logger.error('Smart Banner already initialised')
-    return
-  }
-
-  _smartBanner = new SmartBanner(options)
-}
-
-function showSmartBanner (): void {
-  if (!_smartBanner) {
-    Logger.error('Smart Banner is not initialised yet')
-    return
-  }
-
-  _smartBanner.show()
-}
-
-function hideSmartBanner (): void {
-  if (!_smartBanner) {
-    Logger.error('Smart Banner is not initialised yet')
-    return
-  }
-
-  _smartBanner.hide()
-}
-
-/**
- * Handle third party sharing disable
- *
- * @private
- */
-function _handleDisableThirdPartySharing (): void {
-  let done = sharingOptOut()
-
-  if (!done) {
-    return
-  }
-
-  sharingDisable()
-}
-
-/**
- * Handle GDPR-Forget-Me response
- *
- * @private
- */
-function _handleGdprForgetMe (): void {
-  if (status() !== 'paused') {
-    return
-  }
-
-  gdprDisableFinish()
-
-  Promise.all([
-    identityClear(),
-    globalParamsClear(),
-    queueClear()
-  ]).then(_destroy)
-
-}
 
 /**
  * Check if sdk initialisation was started
@@ -354,7 +257,7 @@ function _pause (): void {
  */
 function _shutdown (async): void {
   if (async) {
-    Logger.log('Adjust SDK has been shutdown due to asynchronous disable')
+    Logger.log('Adtrace SDK has been shutdown due to asynchronous disable')
   }
 
   _pause()
@@ -375,11 +278,10 @@ function _destroy (): void {
   _isInstalled = false
 
   _shutdown()
-  gdprForgetDestroy()
 
   _options = null
 
-  Logger.log('Adjust SDK instance has been destroyed')
+  Logger.log('Adtrace SDK instance has been destroyed')
 }
 
 /**
@@ -390,18 +292,12 @@ function _destroy (): void {
  * @private
  */
 function _continue (activityState: ActivityStateMapT): Promise<void> {
-  Logger.log(`Adjust SDK is starting with web_uuid set to ${activityState.uuid}`)
+  Logger.log(`Adtrace SDK is starting with web_uuid set to ${activityState.uuid}`)
 
   const isInstalled = ActivityState.current.installed
 
-  gdprForgetCheck()
-
-  if (!isInstalled) {
-    sharingDisableCheck()
-  }
-
   const sdkStatus = status()
-  let message = (rest) => `Adjust SDK start has been interrupted ${rest}`
+  let message = (rest) => `Adtrace SDK start has been interrupted ${rest}`
 
   if (sdkStatus === 'off') {
     _shutdown()
@@ -426,9 +322,9 @@ function _continue (activityState: ActivityStateMapT): Promise<void> {
 
       if (isInstalled) {
         _handleSdkInstalled()
-        sharingDisableCheck()
       }
     })
+
 }
 
 /**
@@ -455,7 +351,7 @@ function _error (error: CustomErrorT | Error) {
   }
 
   _shutdown()
-  Logger.error('Adjust SDK start has been canceled due to an error', error)
+  Logger.error('Adtrace SDK start has been canceled due to an error', error)
 
   if (error.stack) {
     throw error
@@ -485,7 +381,7 @@ function _error (error: CustomErrorT | Error) {
  */
 function _start (options: InitOptionsT): void {
   if (status() === 'off') {
-    Logger.log('Adjust SDK is disabled, can not start the sdk')
+    Logger.log('Adtrace SDK is disabled, can not start the sdk')
     return
   }
 
@@ -495,8 +391,6 @@ function _start (options: InitOptionsT): void {
 
   subscribe('sdk:installed', _handleSdkInstalled)
   subscribe('sdk:shutdown', () => _shutdown(true))
-  subscribe('sdk:gdpr-forget-me', _handleGdprForgetMe)
-  subscribe('sdk:third-party-sharing-opt-out', sharingDisableFinish)
   subscribe('attribution:check', (e, result) => attributionCheck(result))
 
   if (typeof options.attributionCallback === 'function') {
@@ -511,19 +405,19 @@ function _start (options: InitOptionsT): void {
 
 function _internalTrackEvent (params: EventParamsT) {
   if (Storage.getType() === STORAGE_TYPES.NO_STORAGE) {
-    const reason = 'Adjust SDK can not track event, no storage available'
+    const reason = 'Adtrace SDK can not track event, no storage available'
     Logger.log(reason)
     return Promise.reject(reason)
   }
 
   if (status() !== 'on') {
-    const reason = 'Adjust SDK is disabled, can not track event'
+    const reason = 'Adtrace SDK is disabled, can not track event'
     Logger.log(reason)
     return Promise.reject(reason)
   }
 
   if (!_isInitialised()) {
-    const reason = 'Adjust SDK can not track event, sdk instance is not initialized'
+    const reason = 'Adtrace SDK can not track event, sdk instance is not initialized'
     Logger.error(reason)
     return Promise.reject(reason)
   }
@@ -533,7 +427,7 @@ function _internalTrackEvent (params: EventParamsT) {
 
     if (!_isInstalled || !_isStarted && _isInitialised()) {
       delay(_callback, 'track event')
-      Logger.log('Running track event is delayed until Adjust SDK is up')
+      Logger.log('Running track event is delayed until Adtrace SDK is up')
     } else {
       _callback()
     }
@@ -550,24 +444,24 @@ function _internalTrackEvent (params: EventParamsT) {
  */
 function _preCheck (description: string, callback: () => mixed, {schedule, waitForInitFinished, optionalInit}: {schedule?: boolean, waitForInitFinished?: boolean, optionalInit?: boolean} = {}): mixed {
   if (Storage.getType() === STORAGE_TYPES.NO_STORAGE) {
-    Logger.log(`Adjust SDK can not ${description}, no storage available`)
+    Logger.log(`Adtrace SDK can not ${description}, no storage available`)
     return
   }
 
   if (status() !== 'on') {
-    Logger.log(`Adjust SDK is disabled, can not ${description}`)
+    Logger.log(`Adtrace SDK is disabled, can not ${description}`)
     return
   }
 
   if (!(optionalInit || _isInitialised()) && waitForInitFinished) {
-    Logger.error(`Adjust SDK can not ${description}, sdk instance is not initialized`)
+    Logger.error(`Adtrace SDK can not ${description}, sdk instance is not initialized`)
     return
   }
 
   if (typeof callback === 'function') {
     if (schedule && !(_isInstalled && _isStarted) && (optionalInit || _isInitialised())) {
       delay(callback, description)
-      Logger.log(`Running ${description} is delayed until Adjust SDK is up`)
+      Logger.log(`Running ${description} is delayed until Adtrace SDK is up`)
     } else {
       return callback()
     }
@@ -579,34 +473,29 @@ function _clearDatabase () {
 }
 
 function _restartAfterAsyncEnable () {
-  Logger.log('Adjust SDK has been restarted due to asynchronous enable')
+  Logger.log('Adtrace SDK has been restarted due to asynchronous enable')
 
   if (_options) {
     _start(_options)
   }
 }
 
-const Adjust = {
+const Adtrace = {
   initSdk,
   getAttribution,
   getWebUUID,
   setReferrer,
   trackEvent,
   addGlobalCallbackParameters,
-  addGlobalPartnerParameters,
+  addGlobalValueParameters,
   removeGlobalCallbackParameter,
-  removeGlobalPartnerParameter,
+  removeGlobalValueParameter,
   clearGlobalCallbackParameters,
-  clearGlobalPartnerParameters,
+  clearGlobalValueParameters,
   switchToOfflineMode,
   switchBackToOnlineMode,
   stop,
   restart,
-  gdprForgetMe,
-  disableThirdPartySharing,
-  initSmartBanner,
-  showSmartBanner,
-  hideSmartBanner,
   __testonly__: {
     destroy: _destroy,
     clearDatabase: _clearDatabase
@@ -616,4 +505,4 @@ const Adjust = {
   }
 }
 
-export default Adjust
+export default Adtrace

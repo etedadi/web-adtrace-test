@@ -1,9 +1,9 @@
-import Adjust from '../../sdk/main'
+import Adtrace from '../../sdk/main'
 import {getItem, setItem} from '../storage'
 
 const _ui = {}
 const _form = {}
-let _defaultReferrerConfig = {'adjust_external_click_id': 'dummy_id'}
+let _defaultReferrerConfig = {'adtrace_external_click_id': 'dummy_id'}
 let _disabled = false
 let _timeoutId = null
 
@@ -46,7 +46,7 @@ function _handleSave (e) {
     _disabled = false
     _ui.submitButton.classList.remove('loading')
     _ui.submitButton.disabled = false
-    Adjust.setReferrer(referrer)
+    Adtrace.setReferrer(referrer)
   }, 1000)
 }
 
@@ -66,7 +66,7 @@ function _handleSetReferrer () {
     _disabled = false
     _ui.setReferrerButton.classList.remove('loading')
     _ui.setReferrerButton.disabled = false
-    Adjust.setReferrer(_referrerConfigToString(referrerConfig))
+    Adtrace.setReferrer(_referrerConfigToString(referrerConfig))
   }, 1000)
 }
 
@@ -98,7 +98,7 @@ function _setJson (referrerConfig) {
     _form.reffererValue.value = referrerConfig[key]
   })
 
-  _ui.referrerConfigJson.textContent = `Adjust.setReferrer("${_referrerConfigToString(referrerConfig)}")`
+  _ui.referrerConfigJson.textContent = `Adtrace.setReferrer("${_referrerConfigToString(referrerConfig)}")`
 }
 
 function _referrerConfigToString (referrerConfig) {

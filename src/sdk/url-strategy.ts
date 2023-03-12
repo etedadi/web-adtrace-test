@@ -4,17 +4,11 @@ import { ENDPOINTS } from './constants'
 
 enum UrlStrategy {
   Default = 'default',
-  India = 'india',
-  China = 'china'
+
 }
 
-enum DataResidency {
-  EU = 'EU',
-  TR = 'TR',
-  US = 'US'
-}
 
-type EndpointName = UrlStrategy | DataResidency
+type EndpointName = UrlStrategy
 
 type BaseUrlsMap = {
   app: string;
@@ -47,24 +41,12 @@ function getEndpointPreference(): BaseUrlsMap | EndpointName[] {
     return [dataResidency]
   }
 
-  if (urlStrategy === UrlStrategy.India) {
-    return [UrlStrategy.India, UrlStrategy.Default]
-  }
-
-  if (urlStrategy === UrlStrategy.China) {
-    return [UrlStrategy.China, UrlStrategy.Default]
-  }
-
-  return [UrlStrategy.Default, UrlStrategy.India, UrlStrategy.China]
+  return [UrlStrategy.Default]
 }
 
-const endpointMap: Record<UrlStrategy | DataResidency, BaseUrlsMap> = {
+const endpointMap: Record<UrlStrategy , BaseUrlsMap> = {
   [UrlStrategy.Default]: ENDPOINTS.default,
-  [UrlStrategy.India]: ENDPOINTS.india,
-  [UrlStrategy.China]: ENDPOINTS.china,
-  [DataResidency.EU]: ENDPOINTS.EU,
-  [DataResidency.TR]: ENDPOINTS.TR,
-  [DataResidency.US]: ENDPOINTS.US
+
 }
 
 interface BaseUrlsIterator extends Iterator<BaseUrlsMap> {
@@ -85,7 +67,7 @@ function getPreferredUrls(endpoints: Partial<Record<UrlStrategy, BaseUrlsMap>>):
   }
 }
 
-function getBaseUrlsIterator(endpoints: Partial<Record<UrlStrategy | DataResidency, BaseUrlsMap>> = endpointMap): BaseUrlsIterator {
+function getBaseUrlsIterator(endpoints: Partial<Record<UrlStrategy, BaseUrlsMap>> = endpointMap): BaseUrlsIterator {
   const _urls = getPreferredUrls(endpoints)
 
   let _counter = 0
@@ -104,4 +86,4 @@ function getBaseUrlsIterator(endpoints: Partial<Record<UrlStrategy | DataResiden
   }
 }
 
-export { getBaseUrlsIterator, BaseUrlsIterator, UrlStrategy, DataResidency, BaseUrlsMap }
+export { getBaseUrlsIterator, BaseUrlsIterator, UrlStrategy, BaseUrlsMap }

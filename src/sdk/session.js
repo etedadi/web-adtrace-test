@@ -18,7 +18,7 @@ import {publish, subscribe} from './pub-sub'
 import {SECOND} from './constants'
 import {reload as reloadPreferences} from './preferences'
 import {status} from './disable'
-import Adjust from './main'
+import Adtrace from './main'
 
 /**
  * Flag to mark if session watch is already on
@@ -176,7 +176,7 @@ function _restoreAfterAsyncEnable (): void {
   if (!_running && status() === 'on') {
     off(documentExt, _pva.visibilityChange, _restoreAfterAsyncEnable)
 
-    Adjust.__internal__.restartAfterAsyncEnable()
+    Adtrace.__internal__.restartAfterAsyncEnable()
   }
 }
 
@@ -229,14 +229,14 @@ function _stopTimer (): void {
  * Prepare parameters for the session tracking
  *
  * @param {Array} callbackParams
- * @param {Array} partnerParams
+ * @param {Array} eventValueParams
  * @returns {Object}
  * @private
  */
-function _prepareParams ({callbackParams, partnerParams}: $ReadOnly<GlobalParamsMapT>): SessionRequestParamsT {
+function _prepareParams ({callbackParams, eventValueParams}: $ReadOnly<GlobalParamsMapT>): SessionRequestParamsT {
   return {
     callbackParams: callbackParams.length ? convertToMap(callbackParams) : null,
-    partnerParams: partnerParams.length ? convertToMap(partnerParams) : null
+    valueParams: eventValueParams.length ? convertToMap(eventValueParams) : null
   }
 }
 

@@ -7,7 +7,7 @@ import {push} from './queue'
 /**
  * Check the following:
  * - redirected from somewhere other then client's website
- * - there is adjust_referrer query param
+ * - there is adtrace_referrer query param
  *
  * @returns {boolean}
  * @private
@@ -17,7 +17,7 @@ function _getReferrer (): ?string {
     .substring(1)
     .split('&')
     .map(pair => pair.split('='))
-    .reduce(reducer, {})['adjust_referrer']
+    .reduce(reducer, {})['adtrace_referrer']
 }
 
 /**
@@ -47,11 +47,11 @@ export default function sdkClick (manualReferrer?: string, timestamp?: number): 
     referrer = _getReferrer()
   }
 
-  if (referrer) {
+  // if (referrer) {
     push({
       url: '/sdk_click',
       method: 'POST',
       params: _prepareParams(referrer)
     }, {timestamp})
-  }
+  // }
 }

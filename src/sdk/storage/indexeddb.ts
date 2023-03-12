@@ -686,7 +686,7 @@ class IndexedDBWrapper implements IStorage {
 
   /**
    * Close db connection and delete the db
-   * WARNING: should be used only by adjust's demo app!
+   * WARNING: should be used only by adtrace's demo app!
    */
   deleteDatabase(): Promise<void> {
     this.destroy()

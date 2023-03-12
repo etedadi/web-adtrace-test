@@ -1,10 +1,10 @@
-import Adjust from '../../sdk/main'
+import Adtrace from '../../sdk/main'
 import SimpleAction from '../simple-action'
 import { write } from '../log'
 
 function init () {
   SimpleAction('get-attr', () => {
-    const attr = Adjust.getAttribution()
+    const attr = Adtrace.getAttribution()
 
     if (attr) {
       write('Attribution:')

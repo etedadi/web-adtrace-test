@@ -52,25 +52,6 @@
           </div>
 
           <div class="form-row">
-            <label for="data-residency">Data Residency</label>
-            <select id="data-residency">
-              <option value="" selected>None</option>
-              <option value="EU">Europe</option>
-              <option value="TR">Turkey</option>
-              <option value="US">USA</option>
-            </select>
-          </div>
-
-          <div class="form-row">
-            <label for="url-strategy">URL strategy</label>
-            <select id="url-strategy">
-              <option value="" selected>None</option>
-              <option value="india">India</option>
-              <option value="china">China</option>
-            </select>
-          </div>
-
-          <div class="form-row">
             <label for="log-level">Log Level</label>
             <select id="log-level">
               <option value="verbose">verbose</option>
@@ -90,10 +71,10 @@
       </div>
 
       <div class="inline-actions">
-        <button type="submit" title="Calls Adjust.initSdk()">Re-init SDK</button>
+        <button type="submit" title="Calls Adtrace.initSdk()">Re-init SDK</button>
         <button type="button" id="restore-default-config" title="Restores default config">Reset config</button>
         <button type="button" class="remove" id="reset"
-          title="Removes SDK stored data and calls Adjust.initSdk()">Reset</button>
+          title="Removes SDK stored data and calls Adtrace.initSdk()">Reset</button>
       </div>
     </form>
 

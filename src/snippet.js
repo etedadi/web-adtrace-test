@@ -1,5 +1,5 @@
 /* eslint-disable */
-(function (window, document, tag, url, corsMode, integrity, sdkName, methods, placeholder, script, first) {
+(function (window, document, tag, url, sdkName, methods, placeholder, script, first) {
 
   var queueName = sdkName + '_q';
 
@@ -15,11 +15,6 @@
   script.async = true;
   script.src = url;
 
-  if (integrity) {
-    script.crossOrigin = corsMode;
-    script.integrity = integrity;
-  }
-
   script.onload = function () {
     for (var i = 0; i < window[queueName].length; i++) {
       window[sdkName][window[queueName][i][0]].apply(window[sdkName], window[queueName][i][1]);
@@ -31,31 +26,26 @@
   window,
   document,
   'script',
-  'https://cdn.adjust.com/adjust-latest.min.js',
+  'https://cdn.adtrace.io/adtrace-latest.min.js',
   'anonymous',
   env.INTEGRITY,
-  'Adjust',
+  'Adtrace',
   [
     'initSdk',
-    'getAttribution',
-    'getWebUUID',
-    'setReferrer',
     'trackEvent',
     'addGlobalCallbackParameters',
-    'addGlobalPartnerParameters',
+    'addGlobalValueParameters',
     'removeGlobalCallbackParameter',
-    'removeGlobalPartnerParameter',
+    'removeGlobalValueParameter',
     'clearGlobalCallbackParameters',
-    'clearGlobalPartnerParameters',
+    'clearGlobalValueParameters',
     'switchToOfflineMode',
     'switchBackToOnlineMode',
     'stop',
     'restart',
     'gdprForgetMe',
     'disableThirdPartySharing',
-    'initSmartBanner',
-    'showSmartBanner',
-    'hideSmartBanner',
+    'initSmartBanner'
   ],
   function (context, queue, methodName) {
     context[methodName] = function () {

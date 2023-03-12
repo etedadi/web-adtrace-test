@@ -12,7 +12,7 @@
 - Added `setReferrer` method to set referrer and trigger `/sdk_click` request manually.
 
 #### Fixed
-- Fixed [issue](https://github.com/adjust/web_sdk/issues/46) which caused site not to load when cookies are blocked in browser.
+- Fixed [issue](https://github.com/adtrace/web_sdk/issues/46) which caused site not to load when cookies are blocked in browser.
 
 ---
 
@@ -90,7 +90,7 @@
 ### Version 5.0.0 (15th May 2020)
 #### Added
 - New major SDK update.
-- Added SDK exposure under all module definitions, so it works under **CommonJS** and **AMD** environments and is also available through global `Adjust` when loaded through **cdn**.
+- Added SDK exposure under all module definitions, so it works under **CommonJS** and **AMD** environments and is also available through global `Adtrace` when loaded through **cdn**.
 - Added attribution callback support.
 - Added retry mechanism for failed attribution requests.
 - Added HTTP request queueing with retry mechanism.

@@ -39,6 +39,12 @@ h1, h2, h3, h4, h5, h6 {
 .container {
   margin: 20px;
 }
+.h-100{
+  height: 100%;
+}
+.h-auto{
+  height: auto;
+}
 
 h1 {
   text-align: center;
@@ -55,14 +61,14 @@ h1 {
   }
 }
 
-.adjust-logo {
+.adtrace-logo {
   $logoImgSize: $logoSize - 12px;
   display: block;
   float: left;
   width: $logoSize;
   height: $logoSize;
   margin-right: 5px;
-  background-image: url("../images/adjust-logo.png");
+  background-image: url("../images/adtrace.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: $logoImgSize $logoImgSize;
@@ -89,23 +95,23 @@ button {
   }
 
   &.remove {
-    border-color: #bb622c;
-    background-color: #ff812e;
+    border-color: #066ca5;
+    background-color: #066ca5;
     color: #fff;
 
     &:hover {
-      background-color: #f37d2e;
+      background-color: #066ca5;
     }
   }
 }
 
 pre {
-  border: 1px solid $headerBgColor;
-  color: $logFontColor;
-  background: $logBgColor;
+  border: 1px solid $borderColor;
+  background-color: #fefefe;
   padding: 10px;
   overflow: auto;
   line-height: 20px;
+  color: #bbb;
   margin: 0;
 }
 
