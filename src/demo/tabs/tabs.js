@@ -163,13 +163,13 @@ function _prepareForm () {
     ...appConfig,
     attributionCallback: _handleAttributionChange
   })
-  Adtrace.initSmartBanner({
-    ...appConfig,
-    webToken: 'p6o2pnb1zkzk',
-    logLevel: 'verbose',
-    onCreated: () => write('Hey, where is a Smart Banner!'),
-    onDismissed: () => write('Oh, you have dismissed the Smart Banner'),
-  })
+  // Adtrace.initSmartBanner({
+  //   ...appConfig,
+  //   webToken: 'p6o2pnb1zkzk',
+  //   logLevel: 'verbose',
+  //   onCreated: () => write('Hey, where is a Smart Banner!'),
+  //   onDismissed: () => write('Oh, you have dismissed the Smart Banner'),
+  // })
 
   _form.appToken = _ui.appConfigForm.querySelector('#app-token')
   _form.environment = _ui.appConfigForm.querySelector('#environment')

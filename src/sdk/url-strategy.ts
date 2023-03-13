@@ -4,7 +4,6 @@ import { ENDPOINTS } from './constants'
 
 enum UrlStrategy {
   Default = 'default',
-
 }
 
 

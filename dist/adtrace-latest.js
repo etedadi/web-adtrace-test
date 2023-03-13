@@ -1597,16 +1597,16 @@ function isLocalStorageSupported() /*: boolean*/{
 }
 
 ;// CONCATENATED MODULE: ./src/sdk/globals.js
-/*:: declare var __Adtrace__NAMESPACE: string*/
-/*:: declare var __Adtrace__SDK_VERSION: string*/
+/*:: declare var __ADTRACE__NAMESPACE: string*/
+/*:: declare var __ADTRACE__SDK_VERSION: string*/
 /*:: declare var process: {|
   env: {|
     NODE_ENV: 'development' | 'production' | 'test'
   |}
 |}*/
 var Globals = {
-  namespace: __Adtrace__NAMESPACE || 'adtrace-sdk',
-  version: __Adtrace__SDK_VERSION || '2.1.0',
+  namespace: __ADTRACE__NAMESPACE || 'adtrace-sdk',
+  version: __ADTRACE__SDK_VERSION || '2.1.0',
   env: "production"
 };
 /* harmony default export */ const globals = (Globals);
@@ -7518,16 +7518,15 @@ function sdkClick(manualReferrer /*: string*/, timestamp /*: number*/) /*: void*
   } else {
     referrer = _getReferrer();
   }
-
-  // if (referrer) {
-  push({
-    url: '/sdk_click',
-    method: 'POST',
-    params: sdk_click_prepareParams(referrer)
-  }, {
-    timestamp: timestamp
-  });
-  // }
+  if (referrer) {
+    push({
+      url: '/sdk_click',
+      method: 'POST',
+      params: sdk_click_prepareParams(referrer)
+    }, {
+      timestamp: timestamp
+    });
+  }
 }
 ;// CONCATENATED MODULE: ./src/sdk/main.js
 

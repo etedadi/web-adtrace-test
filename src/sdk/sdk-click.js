@@ -47,11 +47,11 @@ export default function sdkClick (manualReferrer?: string, timestamp?: number): 
     referrer = _getReferrer()
   }
 
-  // if (referrer) {
+  if (referrer) {
     push({
       url: '/sdk_click',
       method: 'POST',
       params: _prepareParams(referrer)
     }, {timestamp})
-  // }
+  }
 }
