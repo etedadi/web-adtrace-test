@@ -362,10 +362,8 @@ function _error (error: CustomErrorT | Error) {
  * Start the execution by preparing the environment for the current usage
  * - prepares mandatory parameters
  * - register some global event listeners (online, offline events)
- * - subscribe to a GDPR-Forget-Me request event
  * - subscribe to the attribution change event
  * - register activity state if doesn't exist
- * - run pending GDPR-Forget-Me if pending
  * - run the package queue if not empty
  * - start watching the session
  *

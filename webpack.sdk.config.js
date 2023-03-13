@@ -30,8 +30,8 @@ module.exports = () => ({
   plugins: [
     new ESLintPlugin(),
     new webpack.DefinePlugin({
-      __ADJUST__NAMESPACE: JSON.stringify(namespace),
-      __ADJUST__SDK_VERSION: JSON.stringify(version)
+      __ADTRACE__NAMESPACE: JSON.stringify(namespace),
+      __ADTRACE__SDK_VERSION: JSON.stringify(version)
     }),
     new FlowWebpackPlugin(),
     new ForkTsCheckerWebpackPlugin()
