@@ -27,7 +27,7 @@ module.exports = {
     "\.(css|scss)$": "<rootDir>/src/sdk/__mocks__/style.js"
   },
   globals: {
-    __ADTRACE__NAMESPACE: 'adtrace-sdk',
+    __ADTRACE__NAMESPACE: 'adtrace-web-sdk',
     __ADTRACE__SDK_VERSION: '2.1.0'
   }
 }

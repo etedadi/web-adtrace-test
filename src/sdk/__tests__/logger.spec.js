@@ -28,13 +28,13 @@ describe('test Logger functionality', () => {
       it('prints info/error message when changing log level', () => {
 
         Logger.default.setLogLevel()
-        expect(console.info).toHaveBeenLastCalledWith('[adtrace-sdk]', today, 'INFO: ', 'Log level set to verbose')
+        expect(console.info).toHaveBeenLastCalledWith('[adtrace-web-sdk]', today, 'INFO: ', 'Log level set to verbose')
 
         Logger.default.setLogLevel('error')
-        expect(console.info).toHaveBeenLastCalledWith('[adtrace-sdk]', today, 'INFO: ', 'Log level set to error')
+        expect(console.info).toHaveBeenLastCalledWith('[adtrace-web-sdk]', today, 'INFO: ', 'Log level set to error')
 
         Logger.default.setLogLevel('not-existing-level')
-        expect(console.error).toHaveBeenLastCalledWith('[adtrace-sdk]', today, 'ERROR:', 'You must set one of the available log levels: verbose, info, warning, error or none')
+        expect(console.error).toHaveBeenLastCalledWith('[adtrace-web-sdk]', today, 'ERROR:', 'You must set one of the available log levels: verbose, info, warning, error or none')
 
         Logger.default.setLogLevel()
       })
@@ -42,16 +42,16 @@ describe('test Logger functionality', () => {
       it('prints multiple messages passed to each method', () => {
 
         Logger.default.log('Some', 'message')
-        expect(console.log).toHaveBeenCalledWith('[adtrace-sdk]', today, 'LOG:  ', 'Some', 'message')
+        expect(console.log).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'LOG:  ', 'Some', 'message')
 
         Logger.default.info('Some', 'info')
-        expect(console.info).toHaveBeenCalledWith('[adtrace-sdk]', today, 'INFO: ', 'Some', 'info')
+        expect(console.info).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'INFO: ', 'Some', 'info')
 
         Logger.default.warn('Some', 'warning', 'message')
-        expect(console.warn).toHaveBeenCalledWith('[adtrace-sdk]', today, 'WARN: ', 'Some', 'warning', 'message')
+        expect(console.warn).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'WARN: ', 'Some', 'warning', 'message')
 
         Logger.default.error('Some', 'error', 'message')
-        expect(console.error).toHaveBeenCalledWith('[adtrace-sdk]', today, 'ERROR:', 'Some', 'error', 'message')
+        expect(console.error).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'ERROR:', 'Some', 'error', 'message')
 
       })
     })
@@ -63,23 +63,23 @@ describe('test Logger functionality', () => {
 
       it('prints verbose messages', () => {
         Logger.default.log('Some message with looooong explanation')
-        expect(console.log).toHaveBeenCalledWith('[adtrace-sdk]', today, 'LOG:  ', 'Some message with looooong explanation')
+        expect(console.log).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'LOG:  ', 'Some message with looooong explanation')
 
       })
 
       it('prints info messages', () => {
         Logger.default.info('Some message')
-        expect(console.info).toHaveBeenCalledWith('[adtrace-sdk]', today, 'INFO: ', 'Some message')
+        expect(console.info).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'INFO: ', 'Some message')
       })
 
       it('prints warning messages', () => {
         Logger.default.warn('Some warning')
-        expect(console.warn).toHaveBeenCalledWith('[adtrace-sdk]', today, 'WARN: ', 'Some warning')
+        expect(console.warn).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'WARN: ', 'Some warning')
       })
 
       it('prints error messages', () => {
         Logger.default.error('Some error message')
-        expect(console.error).toHaveBeenCalledWith('[adtrace-sdk]', today, 'ERROR:', 'Some error message')
+        expect(console.error).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'ERROR:', 'Some error message')
       })
     })
   })
@@ -95,23 +95,23 @@ describe('test Logger functionality', () => {
 
       it('prints verbose messages', () => {
         Logger.default.log('Some message with looooong explanation')
-        expect(console.log).toHaveBeenCalledWith('[adtrace-sdk]', today, 'LOG:  ', 'Some message with looooong explanation')
+        expect(console.log).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'LOG:  ', 'Some message with looooong explanation')
 
       })
 
       it('prints info messages', () => {
         Logger.default.info('Some message')
-        expect(console.info).toHaveBeenCalledWith('[adtrace-sdk]', today, 'INFO: ', 'Some message')
+        expect(console.info).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'INFO: ', 'Some message')
       })
 
       it('prints warning messages', () => {
         Logger.default.warn('Some warning')
-        expect(console.warn).toHaveBeenCalledWith('[adtrace-sdk]', today, 'WARN: ', 'Some warning')
+        expect(console.warn).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'WARN: ', 'Some warning')
       })
 
       it('prints error messages', () => {
         Logger.default.error('Some error message')
-        expect(console.error).toHaveBeenCalledWith('[adtrace-sdk]', today, 'ERROR:', 'Some error message')
+        expect(console.error).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'ERROR:', 'Some error message')
       })
     })
   })
@@ -143,7 +143,7 @@ describe('test Logger functionality', () => {
 
       it('prints error messages', () => {
         Logger.default.error('Some error message')
-        expect(console.error).toHaveBeenCalledWith('[adtrace-sdk]', today, 'ERROR:', 'Some error message')
+        expect(console.error).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'ERROR:', 'Some error message')
       })
     })
   })
@@ -174,7 +174,7 @@ describe('test Logger functionality', () => {
 
       it('prints error messages', () => {
         Logger.default.error('Some error message')
-        expect(console.error).toHaveBeenCalledWith('[adtrace-sdk]', today, 'ERROR:', 'Some error message')
+        expect(console.error).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'ERROR:', 'Some error message')
       })
     })
   })
@@ -189,23 +189,23 @@ describe('test Logger functionality', () => {
 
       it('prints verbose messages', () => {
         Logger.default.log('Some message with looooong explanation')
-        expect(console.log).toHaveBeenCalledWith('[adtrace-sdk]', today, 'LOG:  ', 'Some message with looooong explanation')
+        expect(console.log).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'LOG:  ', 'Some message with looooong explanation')
 
       })
 
       it('prints info messages', () => {
         Logger.default.info('Some message')
-        expect(console.info).toHaveBeenCalledWith('[adtrace-sdk]', today, 'INFO: ', 'Some message')
+        expect(console.info).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'INFO: ', 'Some message')
       })
 
       it('prints warning messages', () => {
         Logger.default.warn('Some warning')
-        expect(console.warn).toHaveBeenCalledWith('[adtrace-sdk]', today, 'WARN: ', 'Some warning')
+        expect(console.warn).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'WARN: ', 'Some warning')
       })
 
       it('prints error messages', () => {
         Logger.default.error('Some error message')
-        expect(console.error).toHaveBeenCalledWith('[adtrace-sdk]', today, 'ERROR:', 'Some error message')
+        expect(console.error).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'ERROR:', 'Some error message')
       })
     })
   })
@@ -226,17 +226,17 @@ describe('test Logger functionality', () => {
 
       it('prints info messages', () => {
         Logger.default.info('Some message')
-        expect(console.info).toHaveBeenCalledWith('[adtrace-sdk]', today, 'INFO: ', 'Some message')
+        expect(console.info).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'INFO: ', 'Some message')
       })
 
       it('prints warning messages', () => {
         Logger.default.warn('Some warning')
-        expect(console.warn).toHaveBeenCalledWith('[adtrace-sdk]', today, 'WARN: ', 'Some warning')
+        expect(console.warn).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'WARN: ', 'Some warning')
       })
 
       it('prints error messages', () => {
         Logger.default.error('Some error message')
-        expect(console.error).toHaveBeenCalledWith('[adtrace-sdk]', today, 'ERROR:', 'Some error message')
+        expect(console.error).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'ERROR:', 'Some error message')
       })
     })
   })
@@ -262,12 +262,12 @@ describe('test Logger functionality', () => {
 
       it('prints warning messages', () => {
         Logger.default.warn('Some warning')
-        expect(console.warn).toHaveBeenCalledWith('[adtrace-sdk]', today, 'WARN: ', 'Some warning')
+        expect(console.warn).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'WARN: ', 'Some warning')
       })
 
       it('prints error messages', () => {
         Logger.default.error('Some error message')
-        expect(console.error).toHaveBeenCalledWith('[adtrace-sdk]', today, 'ERROR:', 'Some error message')
+        expect(console.error).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'ERROR:', 'Some error message')
       })
     })
   })
@@ -298,7 +298,7 @@ describe('test Logger functionality', () => {
 
       it('prints error messages', () => {
         Logger.default.error('Some error message')
-        expect(console.error).toHaveBeenCalledWith('[adtrace-sdk]', today, 'ERROR:', 'Some error message')
+        expect(console.error).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'ERROR:', 'Some error message')
       })
     })
   })
@@ -348,15 +348,15 @@ describe('test Logger functionality', () => {
 
         Logger.default.setLogLevel('verbose', '#log')
 
-        history.push(`[adtrace-sdk] ${today} INFO:  Log level set to verbose`)
+        history.push(`[adtrace-web-sdk] ${today} INFO:  Log level set to verbose`)
       })
 
       it('prints verbose messages', () => {
         Logger.default.log('Some message with looooong explanation')
 
-        history.push(`[adtrace-sdk] ${today} LOG:   Some message with looooong explanation`)
+        history.push(`[adtrace-web-sdk] ${today} LOG:   Some message with looooong explanation`)
 
-        expect(console.log).toHaveBeenCalledWith('[adtrace-sdk]', today, 'LOG:  ', 'Some message with looooong explanation')
+        expect(console.log).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'LOG:  ', 'Some message with looooong explanation')
         expect(logContainer.textContent).toEqual(history.join('\n') + '\n')
 
       })
@@ -364,27 +364,27 @@ describe('test Logger functionality', () => {
       it('prints info messages', () => {
         Logger.default.info('Some message')
 
-        history.push(`[adtrace-sdk] ${today} INFO:  Some message`)
+        history.push(`[adtrace-web-sdk] ${today} INFO:  Some message`)
 
-        expect(console.info).toHaveBeenCalledWith('[adtrace-sdk]', today, 'INFO: ', 'Some message')
+        expect(console.info).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'INFO: ', 'Some message')
         expect(logContainer.textContent).toEqual(history.join('\n') + '\n')
       })
 
       it('prints warning messages', () => {
         Logger.default.warn('Some warning')
 
-        history.push(`[adtrace-sdk] ${today} WARN:  Some warning`)
+        history.push(`[adtrace-web-sdk] ${today} WARN:  Some warning`)
 
-        expect(console.warn).toHaveBeenCalledWith('[adtrace-sdk]', today, 'WARN: ', 'Some warning')
+        expect(console.warn).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'WARN: ', 'Some warning')
         expect(logContainer.textContent).toEqual(history.join('\n') + '\n')
       })
 
       it('prints error messages', () => {
         Logger.default.error('Some error message')
 
-        history.push(`[adtrace-sdk] ${today} ERROR: Some error message`)
+        history.push(`[adtrace-web-sdk] ${today} ERROR: Some error message`)
 
-        expect(console.error).toHaveBeenCalledWith('[adtrace-sdk]', today, 'ERROR:', 'Some error message')
+        expect(console.error).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'ERROR:', 'Some error message')
         expect(logContainer.textContent).toEqual(history.join('\n') + '\n')
       })
 
@@ -393,9 +393,9 @@ describe('test Logger functionality', () => {
 
         Logger.default.log('Some info', json)
 
-        history.push(`[adtrace-sdk] ${today} LOG:   Some info ${JSON.stringify(json)}`)
+        history.push(`[adtrace-web-sdk] ${today} LOG:   Some info ${JSON.stringify(json)}`)
 
-        expect(console.log).toHaveBeenCalledWith('[adtrace-sdk]', today, 'LOG:  ', 'Some info', json)
+        expect(console.log).toHaveBeenCalledWith('[adtrace-web-sdk]', today, 'LOG:  ', 'Some info', json)
         expect(logContainer.textContent).toEqual(history.join('\n') + '\n')
       })
     })

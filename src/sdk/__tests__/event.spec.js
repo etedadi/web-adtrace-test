@@ -550,7 +550,7 @@ describe('event tracking functionality', () => {
       it('skips trim when custom limit is set and is greater than the previous one', async () => {
 
         Config.default.destroy()
-        Config.default.set({ ...appOptions, eventDeduplicationListLimit: 2 })
+        Config.default.set({ ...appOptions, eventDeduplicationListLimit: 7 })
 
         const list = [
           { id: 'dedup-1230-abc' },

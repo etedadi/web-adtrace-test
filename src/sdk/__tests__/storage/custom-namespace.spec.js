@@ -136,7 +136,7 @@ describe('Custom namespace functionality', () => {
       expect.assertions(1)
 
       return Utils.flushPromises()
-        .then(() => expectStorageExists(custom ? 'adtrace-sdk-' + namespace : 'adtrace-sdk'))
+        .then(() => expectStorageExists(custom ? 'adtrace-web-sdk-' + namespace : 'adtrace-web-sdk'))
     }
 
     it.each([
@@ -175,7 +175,7 @@ describe('Custom namespace functionality', () => {
           AdtraceInstance.stop()
           AdtraceInstance.__testonly__.destroy()
         })
-        .then(() => expectDatabaseExists('adtrace-sdk-test'))
+        .then(() => expectDatabaseExists('adtrace-web-sdk-test'))
         .then(() => AdtraceInstance.__testonly__.clearDatabase())
     })
 
@@ -188,7 +188,7 @@ describe('Custom namespace functionality', () => {
       expect.assertions(1)
 
       return Utils.flushPromises()
-        .then(() => expectLocalStorageExists('adtrace-sdk-test'))
+        .then(() => expectLocalStorageExists('adtrace-web-sdk-test'))
     })
   })
 
@@ -196,8 +196,8 @@ describe('Custom namespace functionality', () => {
 
     const activityState = { 'uuid': 'fake-uuid' }
     const namespace = 'test'
-    const defaultName = 'adtrace-sdk'
-    const customName = `adtrace-sdk-${namespace}`
+    const defaultName = 'adtrace-web-sdk'
+    const customName = `adtrace-web-sdk-${namespace}`
 
     afterEach(() => {
       QuickStorage.deleteData(true)

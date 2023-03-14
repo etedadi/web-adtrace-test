@@ -1605,7 +1605,7 @@ function isLocalStorageSupported() /*: boolean*/{
   |}
 |}*/
 var Globals = {
-  namespace: "adtrace-sdk" || 0,
+  namespace: "adtrace-web-sdk" || 0,
   version: "2.1.0" || 0,
   env: "production"
 };

@@ -1,3 +1,3 @@
 export default {
-  namespace: 'adtrace-sdk-demo'
+  namespace: 'adtrace-web-sdk-demo'
 }

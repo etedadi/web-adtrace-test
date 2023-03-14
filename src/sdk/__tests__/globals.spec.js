@@ -6,8 +6,8 @@ describe('test global constants', () => {
       const Globals = require('../globals')
 
       it('falls back to default values', () => {
-        expect(Globals.default.namespace).toBe('adtrace-sdk')
-        expect(Globals.default.version).toBe('5.0.0')
+        expect(Globals.default.namespace).toBe('adtrace-web-sdk')
+        expect(Globals.default.version).toBe('2.1.0')
       })
     })
   })

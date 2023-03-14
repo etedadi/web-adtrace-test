@@ -5,7 +5,7 @@ const FlowWebpackPlugin = require('flowtype-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
 const packageJson = require('./package.json')
-const namespace = 'adtrace-sdk'
+const namespace = 'adtrace-web-sdk'
 const version = packageJson.version
 
 module.exports = () => ({

@@ -70,10 +70,10 @@ describe('test low-level localStorage manipulation', () => {
     expect(stores[storeNames.preferences.name]).toBeNull()
 
     expect(localStorage.getItem).toHaveBeenCalledTimes(4)
-    expect(localStorage.getItem.mock.calls[0][0]).toBe(`adtrace-sdk.${storeNames.queue.name}`)
-    expect(localStorage.getItem.mock.calls[1][0]).toBe(`adtrace-sdk.${storeNames.activityState.name}`)
-    expect(localStorage.getItem.mock.calls[2][0]).toBe(`adtrace-sdk.${storeNames.globalParams.name}`)
-    expect(localStorage.getItem.mock.calls[3][0]).toBe(`adtrace-sdk.${storeNames.preferences.name}`)
+    expect(localStorage.getItem.mock.calls[0][0]).toBe(`adtrace-web-sdk.${storeNames.queue.name}`)
+    expect(localStorage.getItem.mock.calls[1][0]).toBe(`adtrace-web-sdk.${storeNames.activityState.name}`)
+    expect(localStorage.getItem.mock.calls[2][0]).toBe(`adtrace-web-sdk.${storeNames.globalParams.name}`)
+    expect(localStorage.getItem.mock.calls[3][0]).toBe(`adtrace-web-sdk.${storeNames.preferences.name}`)
 
   })
 
@@ -108,10 +108,10 @@ describe('test low-level localStorage manipulation', () => {
     stores[storeNames.preferences.name] = preferencesRecord
 
     expect(localStorage.getItem('should-stay-intact')).toBe('something')
-    expect(localStorage.getItem(`adtrace-sdk.${storeNames.queue.name}`)).toEqual(JSON.stringify(queueRecords))
-    expect(localStorage.getItem(`adtrace-sdk.${storeNames.activityState.name}`)).toEqual(JSON.stringify(activityStateRecords))
-    expect(localStorage.getItem(`adtrace-sdk.${storeNames.globalParams.name}`)).toEqual(JSON.stringify(globalParamsRecords))
-    expect(localStorage.getItem(`adtrace-sdk.${storeNames.preferences.name}`)).toEqual(JSON.stringify(preferencesRecordEncoded))
+    expect(localStorage.getItem(`adtrace-web-sdk.${storeNames.queue.name}`)).toEqual(JSON.stringify(queueRecords))
+    expect(localStorage.getItem(`adtrace-web-sdk.${storeNames.activityState.name}`)).toEqual(JSON.stringify(activityStateRecords))
+    expect(localStorage.getItem(`adtrace-web-sdk.${storeNames.globalParams.name}`)).toEqual(JSON.stringify(globalParamsRecords))
+    expect(localStorage.getItem(`adtrace-web-sdk.${storeNames.preferences.name}`)).toEqual(JSON.stringify(preferencesRecordEncoded))
 
     QuickStorage.default.clear()
 
@@ -121,10 +121,10 @@ describe('test low-level localStorage manipulation', () => {
     expect(stores[storeNames.preferences.name]).toEqual(preferencesRecord)
 
     expect(localStorage.getItem('should-stay-intact')).toBe('something')
-    expect(localStorage.getItem(`adtrace-sdk.${storeNames.queue.name}`)).toBeNull()
-    expect(localStorage.getItem(`adtrace-sdk.${storeNames.activityState.name}`)).toBeNull()
-    expect(localStorage.getItem(`adtrace-sdk.${storeNames.globalParams.name}`)).toBeNull()
-    expect(localStorage.getItem(`adtrace-sdk.${storeNames.preferences.name}`)).toEqual(JSON.stringify(preferencesRecordEncoded))
+    expect(localStorage.getItem(`adtrace-web-sdk.${storeNames.queue.name}`)).toBeNull()
+    expect(localStorage.getItem(`adtrace-web-sdk.${storeNames.activityState.name}`)).toBeNull()
+    expect(localStorage.getItem(`adtrace-web-sdk.${storeNames.globalParams.name}`)).toBeNull()
+    expect(localStorage.getItem(`adtrace-web-sdk.${storeNames.preferences.name}`)).toEqual(JSON.stringify(preferencesRecordEncoded))
 
   })
 
