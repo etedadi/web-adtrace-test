@@ -372,7 +372,7 @@ describe('test session functionality', () => {
             method: 'POST',
             params: {
               callbackParams: null,
-              partnerParams: null
+              valueParams: null
             }
           }, {auto: true})
 
@@ -413,7 +413,7 @@ describe('test session functionality', () => {
         {key: 'key1', value: 'value1'},
         {key: 'key2', value: 'value2'}
       ]
-      const partnerParams = [
+      const valueParams = [
         {key: 'some', value: 'thing'},
         {key: 'very', value: 'nice'}
       ]
@@ -422,7 +422,7 @@ describe('test session functionality', () => {
 
       return Promise.all([
         GlobalParams.add(callbackParams, 'callback'),
-        GlobalParams.add(partnerParams, 'partner')
+        GlobalParams.add(valueParams, 'value')
       ])
         .then(() => Identity.start())
         .then(() => {
@@ -443,7 +443,7 @@ describe('test session functionality', () => {
             method: 'POST',
             params: {
               callbackParams: {key1: 'value1', key2: 'value2'},
-              partnerParams: {some: 'thing', very: 'nice'}
+              valueParams: {some: 'thing', very: 'nice'}
             }
           }, {auto: true})
 
@@ -461,7 +461,7 @@ describe('test session functionality', () => {
               sessionLength: 60,
               sessionCount: 1,
               callbackParams: {key1: 'value1', key2: 'value2'},
-              partnerParams: {some: 'thing', very: 'nice'}
+              valueParams: {some: 'thing', very: 'nice'}
             }
           })
 
@@ -777,7 +777,7 @@ describe('test session functionality', () => {
             method: 'POST',
             params: {
               callbackParams: null,
-              partnerParams: null
+              valueParams: null
             }
           }, {auto: true})
           expect(PubSub.publish).not.toHaveBeenCalled()
@@ -850,7 +850,7 @@ describe('test session functionality', () => {
             method: 'POST',
             params: {
               callbackParams: null,
-              partnerParams: null
+              valueParams: null
             }
           }, {auto: true})
 
@@ -954,7 +954,7 @@ describe('test session functionality', () => {
             method: 'POST',
             params: {
               callbackParams: null,
-              partnerParams: null
+              valueParams: null
             }
           }, {auto: true})
 

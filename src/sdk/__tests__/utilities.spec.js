@@ -139,15 +139,15 @@ describe('test for utility methods', () => {
 
   describe('test for isRequest', () => {
     it('returns true', () => {
-      expect(Utilities.isRequest('https://app.adjust.com/session', 'session')).toBeTruthy()
-      expect(Utilities.isRequest('https://app.adjust.com/session?some=params', 'session')).toBeTruthy()
-      expect(Utilities.isRequest('https://app.adjust.com/event/?some=params', 'event')).toBeTruthy()
-      expect(Utilities.isRequest('https://app.adjust.com/event/', 'event')).toBeTruthy()
+      expect(Utilities.isRequest('https://app.adtrace.io/session', 'session')).toBeTruthy()
+      expect(Utilities.isRequest('https://app.adtrace.io/session?some=params', 'session')).toBeTruthy()
+      expect(Utilities.isRequest('https://app.adtrace.io/event/?some=params', 'event')).toBeTruthy()
+      expect(Utilities.isRequest('https://app.adtrace.io/event/', 'event')).toBeTruthy()
     })
 
     it('returns false', () => {
-      expect(Utilities.isRequest('https://app.adjust.com/sessionnnn', 'session')).toBeFalsy()
-      expect(Utilities.isRequest('https://app.adjust.com/ssession', 'session')).toBeFalsy()
+      expect(Utilities.isRequest('https://app.adtrace.io/sessionnnn', 'session')).toBeFalsy()
+      expect(Utilities.isRequest('https://app.adtrace.io/ssession', 'session')).toBeFalsy()
     })
   })
 

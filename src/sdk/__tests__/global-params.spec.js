@@ -28,21 +28,21 @@ describe('global parameters functionality', () => {
     return GlobalParams.add([{key: 'key1', value: 'value1'}])
       .catch(error => {
         expect(error.message).toBe('No type provided')
-        expect(Logger.default.error).toHaveBeenCalledWith('Global parameter type not provided, `callback` or `partner` types are available')
+        expect(Logger.default.error).toHaveBeenCalledWith('Global parameter type not provided, `callback` or `value` types are available')
         expect(Logger.default.error).toHaveBeenCalledTimes(1)
 
         return GlobalParams.remove('key1')
       })
       .catch(error => {
         expect(error.message).toBe('No type provided')
-        expect(Logger.default.error).toHaveBeenCalledWith('Global parameter type not provided, `callback` or `partner` types are available')
+        expect(Logger.default.error).toHaveBeenCalledWith('Global parameter type not provided, `callback` or `value` types are available')
         expect(Logger.default.error).toHaveBeenCalledTimes(2)
 
         return GlobalParams.removeAll()
       })
       .catch(error => {
         expect(error.message).toBe('No type provided')
-        expect(Logger.default.error).toHaveBeenCalledWith('Global parameter type not provided, `callback` or `partner` types are available')
+        expect(Logger.default.error).toHaveBeenCalledWith('Global parameter type not provided, `callback` or `value` types are available')
         expect(Logger.default.error).toHaveBeenCalledTimes(3)
       })
 
@@ -53,18 +53,18 @@ describe('global parameters functionality', () => {
     expect.assertions(4)
 
     return GlobalParams.get()
-      .then(({callbackParams, partnerParams}) => {
+      .then(({callbackParams, valueParams}) => {
         expect(callbackParams).toEqual([])
-        expect(partnerParams).toEqual([])
+        expect(valueParams).toEqual([])
 
         jest.spyOn(Storage.default, 'filterBy')
           .mockReturnValue(null)
 
         return GlobalParams.get()
       })
-      .then(({callbackParams, partnerParams}) => {
+      .then(({callbackParams, valueParams}) => {
         expect(callbackParams).toEqual([])
-        expect(partnerParams).toEqual([])
+        expect(valueParams).toEqual([])
 
         Storage.default.filterBy.mockRestore()
       })
@@ -86,18 +86,18 @@ describe('global parameters functionality', () => {
         ])
         return GlobalParams.get()
       })
-      .then(({callbackParams, partnerParams}) => {
+      .then(({callbackParams, valueParams}) => {
         expect(callbackParams).toEqual([
           {key: 'key1', value: 'last value1'},
           {key: 'key2', value: 'value2'}
         ])
-        expect(partnerParams).toEqual([])
+        expect(valueParams).toEqual([])
         expect(Logger.default.log).toHaveBeenCalledTimes(1)
         expect(Logger.default.log).toHaveBeenCalledWith('Following callback parameters have been saved: key1:last value1, key2:value2')
       })
   })
 
-  it('stores global partner params and override repeating keys if adding them at later point', () => {
+  it('stores global value params and override repeating keys if adding them at later point', () => {
 
     expect.assertions(6)
 
@@ -105,27 +105,27 @@ describe('global parameters functionality', () => {
       {key: 'key1', value: 'value1'},
       {key: 'key2', value: 'value2'},
       {key: 'key3', value: 'value3'}
-    ], 'partner')
+    ], 'value')
       .then(() => GlobalParams.add([
         {key: 'key1', value: 'new value1'},
         {key: 'key3', value: 'new value3'}
-      ], 'partner'))
+      ], 'value'))
       .then(() => GlobalParams.get())
-      .then(({callbackParams, partnerParams}) => {
+      .then(({callbackParams, valueParams}) => {
         expect(callbackParams).toEqual([])
-        expect(partnerParams).toEqual([
+        expect(valueParams).toEqual([
           {key: 'key1', value: 'new value1'},
           {key: 'key2', value: 'value2'},
           {key: 'key3', value: 'new value3'}
         ])
         expect(Logger.default.log).toHaveBeenCalledTimes(3)
-        expect(Logger.default.log.mock.calls[0][0]).toBe('Following partner parameters have been saved: key1:value1, key2:value2, key3:value3')
-        expect(Logger.default.log.mock.calls[1][0]).toBe('Following partner parameters have been saved: key1:new value1, key3:new value3')
+        expect(Logger.default.log.mock.calls[0][0]).toBe('Following value parameters have been saved: key1:value1, key2:value2, key3:value3')
+        expect(Logger.default.log.mock.calls[1][0]).toBe('Following value parameters have been saved: key1:new value1, key3:new value3')
         expect(Logger.default.log.mock.calls[2][0]).toBe('Keys: key1, key3 already existed so their values have been updated')
       })
   })
 
-  it('stores both callback and partner params and override repeating keys if adding them at later point', () => {
+  it('stores both callback and value params and override repeating keys if adding them at later point', () => {
 
     expect.assertions(9)
 
@@ -142,11 +142,11 @@ describe('global parameters functionality', () => {
         return GlobalParams.add([
           {key: 'key1', value: 'value1'},
           {key: 'key3', value: 'value3'}
-        ], 'partner')
+        ], 'value')
       })
       .then(() => {
 
-        expect(Logger.default.log.mock.calls[1][0]).toBe('Following partner parameters have been saved: key1:value1, key3:value3')
+        expect(Logger.default.log.mock.calls[1][0]).toBe('Following value parameters have been saved: key1:value1, key3:value3')
 
         return GlobalParams.add([
           {key: 'key2', value: 'new value2'},
@@ -161,13 +161,13 @@ describe('global parameters functionality', () => {
         return GlobalParams.add([
           {key: 'key2', value: 'value2'},
           {key: 'key3', value: 'new value3'},
-        ], 'partner')
+        ], 'value')
       })
       .then(() => GlobalParams.get())
-      .then(({callbackParams, partnerParams}) => {
+      .then(({callbackParams, valueParams}) => {
 
         expect(Logger.default.log).toHaveBeenCalledTimes(6)
-        expect(Logger.default.log.mock.calls[4][0]).toBe('Following partner parameters have been saved: key2:value2, key3:new value3')
+        expect(Logger.default.log.mock.calls[4][0]).toBe('Following value parameters have been saved: key2:value2, key3:new value3')
         expect(Logger.default.log.mock.calls[5][0]).toBe('Keys: key3 already existed so their values have been updated')
 
         expect(callbackParams).toEqual([
@@ -176,7 +176,7 @@ describe('global parameters functionality', () => {
           {key: 'key3', value: 'value3'},
           {key: 'key4', value: 'value4'}
         ])
-        expect(partnerParams).toEqual([
+        expect(valueParams).toEqual([
           {key: 'key1', value: 'value1'},
           {key: 'key2', value: 'value2'},
           {key: 'key3', value: 'new value3'}
@@ -196,22 +196,22 @@ describe('global parameters functionality', () => {
       .then(() => GlobalParams.add([
         {key: 'key1', value: 'value1'},
         {key: 'key3', value: 'value3'}
-      ], 'partner'))
+      ], 'value'))
       .then(() => GlobalParams.remove('key2', 'callback'))
       .then(result => {
         expect(result).toEqual(['key2', 'callback'])
-        return GlobalParams.remove('key1', 'partner')
+        return GlobalParams.remove('key1', 'value')
       })
       .then(result => {
-        expect(result).toEqual(['key1', 'partner'])
+        expect(result).toEqual(['key1', 'value'])
         return GlobalParams.get()
       })
-      .then(({callbackParams, partnerParams}) => {
+      .then(({callbackParams, valueParams}) => {
         expect(callbackParams).toEqual([
           {key: 'key1', value: 'value1'},
           {key: 'key3', value: 'value3'}
         ])
-        expect(partnerParams).toEqual([
+        expect(valueParams).toEqual([
           {key: 'key3', value: 'value3'}
         ])
       })
@@ -220,18 +220,18 @@ describe('global parameters functionality', () => {
         expect(result).toEqual(['key3', 'callback'])
         return GlobalParams.get()
       })
-      .then(({callbackParams, partnerParams}) => {
+      .then(({callbackParams, valueParams}) => {
         expect(callbackParams).toEqual([
           {key: 'key1', value: 'value1'}
         ])
-        expect(partnerParams).toEqual([
+        expect(valueParams).toEqual([
           {key: 'key3', value: 'value3'}
         ])
       })
 
   })
 
-  it('removes all callback or partner global parameters', () => {
+  it('removes all callback or value global parameters', () => {
 
     expect.assertions(6)
 
@@ -241,34 +241,34 @@ describe('global parameters functionality', () => {
       {key: 'key3', value: 'value3'}
     ]
 
-    const partnerParams = [
+    const valueParams = [
       {key: 'key1', value: 'value1'},
       {key: 'key3', value: 'value3'}
     ]
 
     return GlobalParams.add(callbackParams, 'callback')
-      .then(() => GlobalParams.add(partnerParams, 'partner'))
+      .then(() => GlobalParams.add(valueParams, 'value'))
       .then(() => GlobalParams.removeAll('callback'))
       .then(result => {
         expect(result).toEqualArrayIgnoringOrder(callbackParams.map(p => [p.key, 'callback']))
         return GlobalParams.get()
       })
-      .then(({callbackParams, partnerParams}) => {
+      .then(({callbackParams, valueParams}) => {
         expect(callbackParams).toEqual([])
-        expect(partnerParams).toEqual([
+        expect(valueParams).toEqual([
           {key: 'key1', value: 'value1'},
           {key: 'key3', value: 'value3'}
         ])
 
-        return GlobalParams.removeAll('partner')
+        return GlobalParams.removeAll('value')
       })
       .then(result => {
-        expect(result).toEqualArrayIgnoringOrder(partnerParams.map(p => [p.key, 'partner']))
+        expect(result).toEqualArrayIgnoringOrder(valueParams.map(p => [p.key, 'value']))
         return GlobalParams.get()
       })
-      .then(({callbackParams, partnerParams}) => {
+      .then(({callbackParams, valueParams}) => {
         expect(callbackParams).toEqual([])
-        expect(partnerParams).toEqual([])
+        expect(valueParams).toEqual([])
       })
 
   })
@@ -285,15 +285,15 @@ describe('global parameters functionality', () => {
       .then(() => GlobalParams.add([
         {key: 'key1', value: 'value1'},
         {key: 'key3', value: 'value3'}
-      ], 'partner'))
+      ], 'value'))
       .then(() => GlobalParams.get())
-      .then(({callbackParams, partnerParams}) => {
+      .then(({callbackParams, valueParams}) => {
         expect(callbackParams).toEqual([
           {key: 'key1', value: 'value1'},
           {key: 'key2', value: 'value2'},
           {key: 'key3', value: 'value3'}
         ])
-        expect(partnerParams).toEqual([
+        expect(valueParams).toEqual([
           {key: 'key1', value: 'value1'},
           {key: 'key3', value: 'value3'}
         ])
@@ -301,9 +301,9 @@ describe('global parameters functionality', () => {
         return GlobalParams.clear()
       })
       .then(() => GlobalParams.get())
-      .then(({callbackParams, partnerParams}) => {
+      .then(({callbackParams, valueParams}) => {
         expect(callbackParams).toEqual([])
-        expect(partnerParams).toEqual([])
+        expect(valueParams).toEqual([])
       })
 
   })

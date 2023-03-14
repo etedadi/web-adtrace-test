@@ -13,7 +13,7 @@ describe('test Converter utility', () => {
         expect(Converter.encodeValue('PUT')).toBe(3)
         expect(Converter.encodeValue('DELETE')).toBe(4)
         expect(Converter.encodeValue('callback')).toBe(1)
-        expect(Converter.encodeValue('partner')).toBe(2)
+        expect(Converter.encodeValue('value')).toBe(2)
         expect(Converter.encodeValue('bla')).toBe('bla')
 
       })
@@ -23,12 +23,12 @@ describe('test Converter utility', () => {
         expect(Converter.convertValues('queue', 'left', 123)).toBe(123)
         expect(Converter.convertValues('activityState', 'left', 'abc123')).toBe('abc123')
         expect(Converter.convertValues('globalParams', 'left', [123, 'callback'])).toEqual([123, 1])
-        expect(Converter.convertValues('globalParams', 'left', [123, 'partner'])).toEqual([123, 2])
+        expect(Converter.convertValues('globalParams', 'left', [123, 'value'])).toEqual([123, 2])
 
         expect(Converter.convertValues('queue', 'right', 123)).toBe(123)
         expect(Converter.convertValues('activityState', 'right', 'abc123')).toBe('abc123')
         expect(Converter.convertValues('globalParams', 'right', [123, 1])).toEqual([123, 'callback'])
-        expect(Converter.convertValues('globalParams', 'right', [123, 2])).toEqual([123, 'partner'])
+        expect(Converter.convertValues('globalParams', 'right', [123, 2])).toEqual([123, 'value'])
 
       })
 
@@ -48,7 +48,7 @@ describe('test Converter utility', () => {
               eventCount: 3,
               lastInterval: 10,
               callbackParams: { key1: 'value1' },
-              partnerParams: { key2: 'value2', key3: 'value3' },
+              valueParams: { key2: 'value2', key3: 'value3' },
               somethingDynamic: 'bla'
             }
           }
@@ -81,7 +81,7 @@ describe('test Converter utility', () => {
               eventCount: 3,
               lastInterval: 10,
               callbackParams: { key1: 'value1' },
-              partnerParams: { key2: 'value2', key3: 'value3' },
+              valueParams: { key2: 'value2', key3: 'value3' },
               somethingDynamic: 'bla'
             }
           }
@@ -128,7 +128,7 @@ describe('test Converter utility', () => {
             sessionCount: 5,
             eventCount: 4,
             lastInterval: 34,
-            partnerParams: { key: 'value' }
+            valueParams: { key: 'value' }
           }
         })
 
@@ -238,7 +238,7 @@ describe('test Converter utility', () => {
         )).toEqual({
           key: 'key2',
           value: 'value2',
-          type: 'partner'
+          type: 'value'
         })
 
       })
@@ -251,7 +251,7 @@ describe('test Converter utility', () => {
           [
             { key: 'key1', value: 'value1', type: 'callback' },
             { key: 'key2', value: 'value2', type: 'callback' },
-            { key: 'key3', value: 'value3', type: 'partner' }
+            { key: 'key3', value: 'value3', type: 'value' }
           ]
         )).toEqual([
           { k: 'key1', v: 'value1', t: 1 },
@@ -269,10 +269,10 @@ describe('test Converter utility', () => {
             { k: 'key4', v: 'value4', t: 2 }
           ]
         )).toEqual([
-          { key: 'key1', value: 'value1', type: 'partner' },
+          { key: 'key1', value: 'value1', type: 'value' },
           { key: 'key2', value: 'value2', type: 'callback' },
-          { key: 'key3', value: 'value3', type: 'partner' },
-          { key: 'key4', value: 'value4', type: 'partner' }
+          { key: 'key3', value: 'value3', type: 'value' },
+          { key: 'key4', value: 'value4', type: 'value' }
         ])
 
         expect(Converter.convertRecords(

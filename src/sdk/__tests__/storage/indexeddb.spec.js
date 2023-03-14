@@ -258,7 +258,7 @@ describe('IndexedDB usage', () => {
               expect(result).toEqual([
                 { keyType: 'key-11', key: 'key-1', value: 'value-1', type: 'callback' },
                 { keyType: 'key-21', key: 'key-2', value: 'value-2', type: 'callback' },
-                { keyType: 'key-32', key: 'key-3', value: 'value-3', type: 'partner' }
+                { keyType: 'key-32', key: 'key-3', value: 'value-3', type: 'value' }
               ])
             })
         })
@@ -308,7 +308,7 @@ describe('IndexedDB usage', () => {
               expect(result).toEqual([
                 { keyType: 'key-11', key: 'key-1', value: 'value-1', type: 'callback' },
                 { keyType: 'key-21', key: 'key-2', value: 'value-2', type: 'callback' },
-                { keyType: 'key-32', key: 'key-3', value: 'value-3', type: 'partner' }
+                { keyType: 'key-32', key: 'key-3', value: 'value-3', type: 'value' }
               ])
             })
         })

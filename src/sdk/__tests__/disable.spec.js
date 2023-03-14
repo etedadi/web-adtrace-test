@@ -42,7 +42,7 @@ describe('test disable functionality', () => {
 
     Disable.disable()
 
-    expect(Logger.default.log).toHaveBeenLastCalledWith('Adjust SDK disable process has already finished')
+    expect(Logger.default.log).toHaveBeenLastCalledWith('Adtrace SDK disable process has already finished')
     expect(Disable.status()).toBe('off')
 
     Disable.restore()
@@ -52,7 +52,7 @@ describe('test disable functionality', () => {
 
     Disable.restore()
 
-    expect(Logger.default.log).toHaveBeenLastCalledWith('Adjust SDK is already enabled')
+    expect(Logger.default.log).toHaveBeenLastCalledWith('Adtrace SDK is already enabled')
     expect(Disable.status()).toBe('on')
 
   })
@@ -67,12 +67,12 @@ describe('test disable functionality', () => {
     Disable.restore()
 
     expect(Preferences.getDisabled()).toEqual({reason: 'gdpr', pending: true})
-    expect(Logger.default.log).toHaveBeenLastCalledWith('Adjust SDK is disabled due to GDPR-Forget-Me request and it can not be re-enabled')
+    expect(Logger.default.log).toHaveBeenLastCalledWith('Adtrace SDK is disabled due to GDPR-Forget-Me request and it can not be re-enabled')
     expect(Disable.status()).toBe('paused')
 
     Disable.disable()
 
-    expect(Logger.default.log).toHaveBeenLastCalledWith('Adjust SDK GDPR disable process has already started')
+    expect(Logger.default.log).toHaveBeenLastCalledWith('Adtrace SDK GDPR disable process has already started')
     expect(Preferences.getDisabled()).toEqual({reason: 'gdpr', pending: true})
     expect(Disable.status()).toBe('paused')
 

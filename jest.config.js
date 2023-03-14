@@ -28,6 +28,6 @@ module.exports = {
   },
   globals: {
     __ADTRACE__NAMESPACE: 'adtrace-sdk',
-    __ADTRACE__SDK_VERSION: 'TEST'
+    __ADTRACE__SDK_VERSION: '2.1.0'
   }
 }

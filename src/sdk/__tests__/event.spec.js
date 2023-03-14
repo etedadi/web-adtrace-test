@@ -192,7 +192,7 @@ describe('event tracking functionality', () => {
         callbackParams: [
           { key: 'some-key', value: 'some-value' }
         ],
-        partnerParams: [
+        valueParams: [
           { key: 'key1', value: 'value1' },
           { key: 'key2', value: 'value2' }
         ],
@@ -206,7 +206,7 @@ describe('event tracking functionality', () => {
         params: {
           eventToken: '123abc',
           callbackParams: { 'some-key': 'some-value' },
-          partnerParams: { key1: 'value1', key2: 'value2' },
+          valueParams: { key1: 'value1', key2: 'value2' },
           revenue: '100.00000',
           currency: 'EUR'
         }
@@ -246,16 +246,16 @@ describe('event tracking functionality', () => {
       await expect(eventPromise).toResolve()
     })
 
-    it('sets default partner parameters to be appended to each track event request', async () => {
+    it('sets default value parameters to be appended to each track event request', async () => {
 
-      const partnerParams = [
+      const valueParams = [
         { key: 'key1', value: 'value1' },
         { key: 'key2', value: 'value2' }
       ]
 
       expect.assertions(3)
 
-      await GlobalParams.add(partnerParams, 'partner')
+      await GlobalParams.add(valueParams, 'value')
 
       const eventPromise = event.default({
         eventToken: 'bla'
@@ -266,7 +266,7 @@ describe('event tracking functionality', () => {
         method: 'POST',
         params: {
           eventToken: 'bla',
-          partnerParams: { key1: 'value1', key2: 'value2' }
+          valueParams: { key1: 'value1', key2: 'value2' }
         }
       })
 
@@ -304,14 +304,14 @@ describe('event tracking functionality', () => {
       await expect(eventPromise).toResolve()
     })
 
-    it('sets default callback and partner parameters and override both with some parameters passed directly', () => {
+    it('sets default callback and value parameters and override both with some parameters passed directly', () => {
 
       const callbackParams = [
         { key: 'key1', value: 'value1' },
         { key: 'key2', value: 'value2' },
         { key: 'key1', value: 'last value1' }
       ]
-      const partnerParams = [
+      const valueParams = [
         { key: 'some', value: 'thing' },
         { key: 'very', value: 'nice' },
         { key: 'bla', value: 'truc' }
@@ -320,7 +320,7 @@ describe('event tracking functionality', () => {
 
       return Promise.all([
         GlobalParams.add(callbackParams, 'callback'),
-        GlobalParams.add(partnerParams, 'partner')
+        GlobalParams.add(valueParams, 'value')
       ])
         .then(() => {
           event.default({
@@ -328,7 +328,7 @@ describe('event tracking functionality', () => {
             callbackParams: [
               { key: 'key2', value: 'new value2' }
             ],
-            partnerParams: [
+            valueParams: [
               { key: 'very', value: 'bad' },
               { key: 'trt', value: 'prc' }
             ]
@@ -340,7 +340,7 @@ describe('event tracking functionality', () => {
             params: {
               eventToken: 'bla',
               callbackParams: { key1: 'last value1', key2: 'new value2' },
-              partnerParams: { some: 'thing', very: 'bad', bla: 'truc', trt: 'prc' }
+              valueParams: { some: 'thing', very: 'bad', bla: 'truc', trt: 'prc' }
             }
           })
         })
@@ -550,7 +550,7 @@ describe('event tracking functionality', () => {
       it('skips trim when custom limit is set and is greater than the previous one', async () => {
 
         Config.default.destroy()
-        Config.default.set({ ...appOptions, eventDeduplicationListLimit: 16 })
+        Config.default.set({ ...appOptions, eventDeduplicationListLimit: 2 })
 
         const list = [
           { id: 'dedup-1230-abc' },

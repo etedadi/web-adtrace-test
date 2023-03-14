@@ -10,7 +10,7 @@ describe('Custom namespace functionality', () => {
   global.indexedDB = fakeIDB
   global.IDBKeyRange = IDBKeyRange
 
-  let AdjustInstance
+  let AdtraceInstance
   let Storage
   let IndexedDB
   let LocalStorage
@@ -108,16 +108,16 @@ describe('Custom namespace functionality', () => {
     beforeEach(() => {
       QuickStorage = require('../../storage/quick-storage').default
       IndexedDB = require('../../storage/indexeddb').IndexedDB
-      AdjustInstance = require('../../main').default
+      AdtraceInstance = require('../../main').default
 
       jest.spyOn(IndexedDB, 'isSupported').mockImplementation(() => Promise.resolve(false))
     })
 
     afterEach(() => {
-      AdjustInstance.stop()
-      AdjustInstance.__testonly__.destroy()
+      AdtraceInstance.stop()
+      AdtraceInstance.__testonly__.destroy()
 
-      return AdjustInstance.__testonly__.clearDatabase()
+      return AdtraceInstance.__testonly__.clearDatabase()
         .then(() => {
           QuickStorage.deleteData(true)
 
@@ -131,12 +131,12 @@ describe('Custom namespace functionality', () => {
       const { namespace } = config
       const custom = !!namespace && namespace.length
 
-      AdjustInstance.initSdk(config)
+      AdtraceInstance.initSdk(config)
 
       expect.assertions(1)
 
       return Utils.flushPromises()
-        .then(() => expectStorageExists(custom ? 'adjust-sdk-' + namespace : 'adjust-sdk'))
+        .then(() => expectStorageExists(custom ? 'adtrace-sdk-' + namespace : 'adtrace-sdk'))
     }
 
     it.each([
@@ -154,7 +154,7 @@ describe('Custom namespace functionality', () => {
       QuickStorage = require('../../storage/quick-storage').default
       IndexedDB = require('../../storage/indexeddb').IndexedDB
       LocalStorage = require('../../storage/localstorage').LocalStorage
-      AdjustInstance = require('../../main').default
+      AdtraceInstance = require('../../main').default
     })
 
     afterEach(() => {
@@ -165,30 +165,30 @@ describe('Custom namespace functionality', () => {
     })
 
     it('Creates a custom-named IndexedDb storage', () => {
-      AdjustInstance.initSdk({ ...config, namespace: 'test' })
+      AdtraceInstance.initSdk({ ...config, namespace: 'test' })
 
       expect.assertions(3)
 
       return Utils.flushPromises()
         .then(() => nextTick(6))
         .then(() => {
-          AdjustInstance.stop()
-          AdjustInstance.__testonly__.destroy()
+          AdtraceInstance.stop()
+          AdtraceInstance.__testonly__.destroy()
         })
-        .then(() => expectDatabaseExists('adjust-sdk-test'))
-        .then(() => AdjustInstance.__testonly__.clearDatabase())
+        .then(() => expectDatabaseExists('adtrace-sdk-test'))
+        .then(() => AdtraceInstance.__testonly__.clearDatabase())
     })
 
     it('Creates a custom-named LocalStorage storage', () => {
       jest.spyOn(IndexedDB, 'isSupported').mockImplementation(() => Promise.resolve(false))
       jest.spyOn(LocalStorage, 'isSupported').mockImplementation(() => Promise.resolve(true))
 
-      AdjustInstance.initSdk({ ...config, namespace: 'test' })
+      AdtraceInstance.initSdk({ ...config, namespace: 'test' })
 
       expect.assertions(1)
 
       return Utils.flushPromises()
-        .then(() => expectLocalStorageExists('adjust-sdk-test'))
+        .then(() => expectLocalStorageExists('adtrace-sdk-test'))
     })
   })
 
@@ -196,8 +196,8 @@ describe('Custom namespace functionality', () => {
 
     const activityState = { 'uuid': 'fake-uuid' }
     const namespace = 'test'
-    const defaultName = 'adjust-sdk'
-    const customName = `adjust-sdk-${namespace}`
+    const defaultName = 'adtrace-sdk'
+    const customName = `adtrace-sdk-${namespace}`
 
     afterEach(() => {
       QuickStorage.deleteData(true)
@@ -230,7 +230,7 @@ describe('Custom namespace functionality', () => {
       })
 
       afterEach(() => {
-        return AdjustInstance.__testonly__.clearDatabase()
+        return AdtraceInstance.__testonly__.clearDatabase()
           .then(() => {
             QuickStorage.deleteData(true)
           })

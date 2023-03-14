@@ -31,7 +31,7 @@ describe('test sdk-click functionality', () => {
     jest.restoreAllMocks()
   })
 
-  it('does nothing if there is no adjust referrer param in the url', () => {
+  it('does nothing if there is no adtrace referrer param in the url', () => {
 
     global.history.pushState({}, '', '?param1=value1&param2=value2')
 
@@ -45,11 +45,11 @@ describe('test sdk-click functionality', () => {
 
   })
 
-  it('requests sdk_click if there is adjust referrer param in the url', () => {
+  it('requests sdk_click if there is adtrace referrer param in the url', () => {
 
     expect.assertions(2)
 
-    global.history.pushState({}, '', '?adjust_referrer=param1%3Dbla%26param2%3Dtruc&param=value')
+    global.history.pushState({}, '', '?adtrace_referrer=param1%3Dbla%26param2%3Dtruc&param=value')
 
     sdkClick.default()
 

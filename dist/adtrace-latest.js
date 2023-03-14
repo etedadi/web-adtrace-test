@@ -3028,7 +3028,7 @@ var InMemoryStorage = /*#__PURE__*/function () {
   }]);
   return InMemoryStorage;
 }();
-var quick_storage_QuickStorage = /*#__PURE__*/function () {
+var QuickStorage = /*#__PURE__*/function () {
   function QuickStorage() {
     var _this = this;
     _classCallCheck(this, QuickStorage);
@@ -3144,7 +3144,7 @@ var quick_storage_QuickStorage = /*#__PURE__*/function () {
   }]);
   return QuickStorage;
 }();
-/* harmony default export */ const quick_storage = (new quick_storage_QuickStorage());
+/* harmony default export */ const quick_storage = (new QuickStorage());
 ;// CONCATENATED MODULE: ./src/sdk/preferences.js
 
 
@@ -3220,31 +3220,6 @@ function setDisabled(value /*: ?SdkDisabledT*/) /*: void*/{
   var sdkDisabled = value ? _objectSpread2({}, value) : null;
   quick_storage.stores[_storeName] = _objectSpread2(_objectSpread2({}, _getPreferences()), {}, {
     sdkDisabled: sdkDisabled
-  });
-  _setPreferences();
-}
-
-/**
- * Get current third-party-sharing disabled state
- *
- * @returns {Object}
- * @private
- */
-function getThirdPartySharing() /*: ?ThirdPartySharingDisabledT*/{
-  var preferences = _getPreferences();
-  return preferences ? preferences.thirdPartySharingDisabled : null;
-}
-
-/**
- * Set current third-party-sharing disabled state
- *
- * @param {Object=} value
- * @private
- */
-function setThirdPartySharing(value /*: ?ThirdPartySharingDisabledT*/) /*: void*/{
-  var thirdPartySharingDisabled = value ? _objectSpread({}, value) : null;
-  QuickStorage.stores[_storeName] = _objectSpread(_objectSpread({}, _getPreferences()), {}, {
-    thirdPartySharingDisabled: thirdPartySharingDisabled
   });
   _setPreferences();
 }
@@ -7891,10 +7866,8 @@ function main_error(error /*: CustomErrorT | Error*/) {
  * Start the execution by preparing the environment for the current usage
  * - prepares mandatory parameters
  * - register some global event listeners (online, offline events)
- * - subscribe to a GDPR-Forget-Me request event
  * - subscribe to the attribution change event
  * - register activity state if doesn't exist
- * - run pending GDPR-Forget-Me if pending
  * - run the package queue if not empty
  * - start watching the session
  *
