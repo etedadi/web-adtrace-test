@@ -14,6 +14,10 @@
 * [پارامتر های سراسری پارتنر](#global-value-parameters)
 * [حالت آفلاین / آنلاین](#offline-online-mode)
 * [توقف / راه‌اندازی مجدد SDK](#stop-restart-sdk)
+* [Get Web UUID](#getters-web-uuid)
+* [User attribution](#get-attribution)
+* [Set Referrer](#set-referrer)
+
 
 
 ## <a id="example-app">اپلیکیشن مثال</a>
@@ -51,6 +55,7 @@ Adtrace.initSdk({
   environment: 'production'
 });
 ```
+> **مهم**: برای روش انتساب مناسب، [setReferrer](#set-referrer) باید تا حد امکان نزدیک به مقداردهی اولیه SDK فراخوانی شود..
 
 در اینجا لیست کامل پارامترهای موجود برای متد `initSdk` آمده است:
 ### پارامترهای اجباری 
@@ -347,21 +352,26 @@ The identifier follows the Universally Unique Identifier (UUID) format.
 
 To get `web_uuid` use the following method:
 
+برای شناسایی کاربران وب منحصر به فرد در Web SDK ادتریس هر زمان که اولین نشست‌ را ردیابی می کند، شناسه ای به نام `web_uuid` تولید می کند. این شناسه در هر زیر دامنه و هر مرورگر ایجاد می شود.
+این شناسه از فرمت شناسه منحصر به فرد جهانی (UUID) پیروی می کند.
+
+ از روش زیر برای دریافت  `web_uuid` استفاده کنید:
+
 <a id="get-web-uuid">**getWebUUID**</a>
 
-Example:
+مثال:
 
 ```js
 const webUUID = Adtrace.getWebUUID();
 ```
 
-## <a id="getters-attribution">User attribution</a>
+## <a id="getters-attribution">اتریبیوشن کاربر</a>
 
-You can access your user's current attribution information by using the following method:
+با استفاده از روش زیر می توانید به اطلاعات فعلی اتریبیوشن کاربر خود دسترسی پیدا کنید:
 
 <a id="get-attribution">**getAttribution**</a>
 
-Example:
+مثال:
 
 ```js
 const attribution = Adtrace.getAttribution();
@@ -369,22 +379,20 @@ const attribution = Adtrace.getAttribution();
 
 
 ## <a id="set-referrer">Setting `referrer`</a>
-You may want to set `referrer` to trigger `sdk_click` manually.
 
-To set `referrer` use the following method:
+ممکن است بخواهید `referrer` را تنظیم کنید تا `sdk_click` را به صورت دستی فعال کند.
+
+برای تنظیم `referrer` از روش زیر استفاده کنید:
 
 <a id="set-referrer-manually">**setReferrer**</a>
 
-Example:
+مثال:
 
 ```js
 Adtrace.setReferrer("adtrace_external_click_id%3DEXTERNAL_CLICK_ID");
 ```
 
-Please note that `referrer` should be properly URL-encoded.
-
-> **Important** For proper attribution this method should be called as close as possible to SDK initialization.
-
+لطفاً توجه داشته باشید که `referrer`  باید به درستی با URL رمزگذاری شده باشد.
 
 
 [adtrace.io]:   https://adtrace.io

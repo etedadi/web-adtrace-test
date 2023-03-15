@@ -14,6 +14,9 @@ Read this in other languages: [English][en-readme], [Persian][fa-readme]
 * [Global value parameters](#global-value-parameters)
 * [Offline/Online mode](#offline-online-mode)
 * [Stop/Restart SDK](#stop-restart-sdk)
+* [Get Web UUID](#getters-web-uuid)
+* [User attribution](#get-attribution)
+* [Set Referrer](#set-referrer)
 
 ## <a id="example-app">Example apps</a>
 
@@ -52,7 +55,10 @@ Adtrace.initSdk({
   environment: 'production'
 });
 ```
- 
+
+> **Important**: For proper attribution method [setReferrer](#set-referrer) should be called as close as possible to SDK initialization.
+
+
 Here is the full list of available parameters for the `initSdk` method:
 
 ### Mandatory params
@@ -375,8 +381,6 @@ Adtrace.setReferrer("adtrace_external_click_id%3DEXTERNAL_CLICK_ID");
 ```
 
 Please note that `referrer` should be properly URL-encoded.
-
-> **Important** For proper attribution this method should be called as close as possible to SDK initialization.
 
 
 [adtrace.io]:   https://adtrace.io
