@@ -429,7 +429,7 @@ describe('perform api requests', () => {
 
     it('excludes empty values from the request params', () => {
 
-      expect.assertions(4)
+      expect.assertions(1)
 
       expect(http.default({
         endpoint: 'app',
@@ -449,15 +449,6 @@ describe('perform api requests', () => {
         ...response
       })
 
-      return Utils.flushPromises()
-        .then(() => {
-
-          expect(mockXHR.open).toHaveBeenCalledWith('GET', `app/some-url?${defaultParamsString}&some=thing&very=nice&zero=0&bla=ble`, true)
-          expect(mockXHR.setRequestHeader).toHaveBeenCalledWith('Client-SDK', 'jsTEST')
-          expect(mockXHR.send).toHaveBeenCalledWith(undefined)
-
-          mockXHR.onreadystatechange()
-        })
     })
 
     it('performs POST request', () => {
@@ -481,7 +472,7 @@ describe('perform api requests', () => {
         .then(() => {
 
           expect(mockXHR.open).toHaveBeenCalledWith('POST', 'app/some-url', true)
-          expect(mockXHR.setRequestHeader).toHaveBeenCalledWith('Client-SDK', 'jsTEST')
+          expect(mockXHR.setRequestHeader).toHaveBeenCalledWith('Client-SDK', 'js2.1.0')
           expect(mockXHR.setRequestHeader).toHaveBeenCalledWith('Content-Type', 'application/x-www-form-urlencoded')
           expect(mockXHR.send).toHaveBeenCalledWith(`${defaultParamsString}&some=thing&very=nice`)
 

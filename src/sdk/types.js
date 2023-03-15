@@ -178,7 +178,6 @@ export type InitOptionsT = $ReadOnly<$Shape<{|
   defaultTracker: $PropertyType<BaseParamsT, 'defaultTracker'>,
   externalDeviceId: $PropertyType<BaseParamsT, 'externalDeviceId'>,
   customUrl: $PropertyType<CustomConfigT, 'customUrl'>,
-  urlStrategy: $PropertyType<CustomConfigT, 'urlStrategy'>,
   eventDeduplicationListLimit: $PropertyType<CustomConfigT, 'eventDeduplicationListLimit'>,
   namespace: $PropertyType<CustomConfigT, 'namespace'>,
   attributionCallback: (string, Object) => mixed
@@ -227,12 +226,6 @@ export type MachineTypeT = {|
 
 export type QueueSizeT = {|
   queueSize: number
-|}
-
-export type SmartBannerOptionsT = {|
-  webToken: string,
-  logLevel: 'none' | 'error' | 'warning' | 'info' | 'verbose',
-  dataResidency: 'EU' | 'TR' | 'US',
 |}
 
 export type DefaultParamsT = {|
