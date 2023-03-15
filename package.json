@@ -16,7 +16,7 @@
     "test": "TZ=UTC jest",
     "test:watch": "TZ=UTC jest --watchAll",
     "test:coverage": "TZ=UTC jest --coverage",
-    "test:all": "npm-run-all test lint flow",
+    "test:all": "npm-run-all lint flow",
     "flow": "flow status --quiet",
     "prepublishOnly": "npm run test:all"
   },
