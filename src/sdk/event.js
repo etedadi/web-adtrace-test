@@ -78,7 +78,7 @@ function _prepareParams (params: EventParamsT, {callbackParams, eventValueParams
     ...convertToMap(callbackParams),
     ...convertToMap(params.callbackParams)
   }
-  const eventValueParams2: GlobalKeyValueParamsT = {
+  const eventValueParamsTemp: GlobalKeyValueParamsT = {
     ...convertToMap(eventValueParams),
     ...convertToMap(params.eventValueParams)
   }
@@ -88,7 +88,7 @@ function _prepareParams (params: EventParamsT, {callbackParams, eventValueParams
   }
 
   if (!isEmpty(eventValueParams)) {
-    globalParams.eventValueParams = eventValueParams2
+    globalParams.eventValueParams = eventValueParamsTemp
   }
 
   return {...baseParams, ...globalParams}

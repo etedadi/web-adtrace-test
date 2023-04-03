@@ -1,4 +1,4 @@
-### Version 2.1.0 (1th April 2023)
+### Version 2.2.1 (1th April 2023)
 #### Added
 - Added a return of Promise from `trackEvent` method.
 - Added `setReferrer` method to set referrer and trigger `/sdk_click` request manually.
@@ -15,7 +15,7 @@
 - Updated deprecated and vulnerable dependencies.
 ---
 
-### Version 2.0.0 (1th August 2022)
+### Version 2.1.1 (1th August 2022)
 #### Fixed
 - Fixed top-level Typescript declarations.
 - Added Typescript support.
