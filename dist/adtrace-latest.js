@@ -7349,12 +7349,12 @@ function event_prepareParams(params /*: EventParamsT*/, _ref /*:: */) /*: EventR
     deduplicationId: params.deduplicationId
   }, _getRevenue(params.revenue, params.currency));
   var eventCallbackParams /*: GlobalKeyValueParamsT*/ = _objectSpread2(_objectSpread2({}, convertToMap(callbackParams)), convertToMap(params.callbackParams));
-  var eventValueParams2 /*: GlobalKeyValueParamsT*/ = _objectSpread2(_objectSpread2({}, convertToMap(eventValueParams)), convertToMap(params.eventValueParams));
+  var eventValueParamsTemp /*: GlobalKeyValueParamsT*/ = _objectSpread2(_objectSpread2({}, convertToMap(eventValueParams)), convertToMap(params.eventValueParams));
   if (!isEmpty(eventCallbackParams)) {
     globalParams.callbackParams = eventCallbackParams;
   }
   if (!isEmpty(eventValueParams)) {
-    globalParams.eventValueParams = eventValueParams2;
+    globalParams.eventValueParams = eventValueParamsTemp;
   }
   return _objectSpread2(_objectSpread2({}, baseParams), globalParams);
 }
